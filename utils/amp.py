@@ -24,9 +24,17 @@ class Paths:
 
 class States:
     OFFLINE = 0
+    PRE_START = 5
     STARTING = 10
     ONLINE = 20
     SHUTTING_DOWN = 30
+    SLEEP_PREPARE = 45
+    WAITING = 60
+    INSTALLING = 70
+    FAILED = 100
+    SUSPENDED = 200
+    MAINTAINENCE = 250
+    UNKNOWN = 999
 
 class Power:
     START = "start"
@@ -51,12 +59,26 @@ def get_server_state():
     state = response["State"]
     if state == States.OFFLINE:
         return "offline"
+    elif state == States.PRE_START:
+        return "pre-starting"
     elif state == States.STARTING:
         return "starting"
     elif state == States.ONLINE:
         return "online"
     elif state == States.SHUTTING_DOWN:
         return "shutting down"
+    elif state == States.SLEEP_PREPARE:
+        return "sleep-mode preparing"
+    elif state == States.INSTALLING:
+        return "installing"
+    elif state == States.FAILED:
+        return "failed"
+    elif state == States.SUSPENDED:
+        return "suspended"
+    elif state == States.MAINTAINENCE:
+        return "under maintainence"
+    elif state == States.UNKNOWN:
+        return "unknown"
     else:
         return str(state)
 
